@@ -46,7 +46,7 @@ exports.nuevoProducto = async (req, res, next) => {
       mensaje: "Product created successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -56,7 +56,7 @@ exports.mostrarProductos = async (req, res, next) => {
     const productos = await Productos.find();
     res.json(productos);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -93,7 +93,7 @@ exports.actualizarProducto = async (req, res, next) => {
 
     res.json(producto);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -113,7 +113,7 @@ exports.eliminarProducto = async (req, res, next) => {
       mensaje: "Product deleted successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };

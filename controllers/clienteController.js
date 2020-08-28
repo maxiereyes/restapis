@@ -9,7 +9,7 @@ exports.nuevoCliente = async (req, res, next) => {
       mensaje: "Add client successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -19,7 +19,7 @@ exports.mostrarClientes = async (req, res, next) => {
     const clientes = await Clientes.find();
     res.json(clientes);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -35,7 +35,7 @@ exports.obtenerCliente = async (req, res, next) => {
     }
     res.json(cliente);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -48,7 +48,7 @@ exports.actualizarCliente = async (req, res, next) => {
     });
     res.json(cliente);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -67,7 +67,7 @@ exports.eliminarCliente = async (req, res, next) => {
       mensaje: "Client delete successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };

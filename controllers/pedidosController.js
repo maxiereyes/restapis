@@ -8,7 +8,7 @@ exports.nuevoPedido = async (req, res, next) => {
       mensaje: "Order created successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -22,7 +22,7 @@ exports.mostrarPedidos = async (req, res, next) => {
 
     res.json(pedidos);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -45,7 +45,7 @@ exports.obtenerPedido = async (req, res, next) => {
 
     res.json(pedido);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -59,7 +59,7 @@ exports.actualizarPedido = async (req, res, next) => {
 
     res.json(pedido);
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
@@ -80,7 +80,7 @@ exports.eliminarPedido = async (req, res, next) => {
       mensaje: "Order deleted successfully",
     });
   } catch (error) {
-    console.log(error);
+    res.send(error);
     next();
   }
 };
