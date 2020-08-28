@@ -31,7 +31,7 @@ exports.obtenerCliente = async (req, res, next) => {
       res.json({
         mensaje: "Client does not exist!",
       });
-      next();
+      return next();
     }
     res.json(cliente);
   } catch (error) {
@@ -61,7 +61,7 @@ exports.eliminarCliente = async (req, res, next) => {
       res.json({
         mensaje: "Cliente does not exist!",
       });
-      next();
+      return next();
     }
     res.json({
       mensaje: "Client delete successfully",
