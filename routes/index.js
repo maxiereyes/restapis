@@ -16,6 +16,7 @@ module.exports = () => {
     productoController.subirArchivo,
     productoController.nuevoProducto
   );
+  router.post("/productos/busqueda/:query", productoController.buscarProducto);
   router.get("/productos", productoController.mostrarProductos);
   router.get("/productos/:id", productoController.obtenerProducto);
   router.put(
