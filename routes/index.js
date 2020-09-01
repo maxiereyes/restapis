@@ -3,34 +3,47 @@ const router = express.Router();
 const clienteController = require("../controllers/clienteController");
 const productoController = require("../controllers/productoController");
 const pedidosController = require("../controllers/pedidosController");
+const usuariosController = require("../controllers/usuariosController");
+
+const auth = require("../middlewares/auth");
 
 module.exports = () => {
-  router.post("/clientes", clienteController.nuevoCliente);
-  router.get("/clientes", clienteController.mostrarClientes);
-  router.get("/clientes/:id", clienteController.obtenerCliente);
-  router.put("/clientes/:id", clienteController.actualizarCliente);
-  router.delete("/clientes/:id", clienteController.eliminarCliente);
+  router.post("/clientes", auth, clienteController.nuevoCliente);
+  router.get("/clientes", auth, clienteController.mostrarClientes);
+  router.get("/clientes/:id", auth, clienteController.obtenerCliente);
+  router.put("/clientes/:id", auth, clienteController.actualizarCliente);
+  router.delete("/clientes/:id", auth, clienteController.eliminarCliente);
 
   router.post(
     "/productos",
+    auth,
     productoController.subirArchivo,
     productoController.nuevoProducto
   );
-  router.post("/productos/busqueda/:query", productoController.buscarProducto);
-  router.get("/productos", productoController.mostrarProductos);
-  router.get("/productos/:id", productoController.obtenerProducto);
+  router.post(
+    "/productos/busqueda/:query",
+    auth,
+    productoController.buscarProducto
+  );
+  router.get("/productos", auth, productoController.mostrarProductos);
+  router.get("/productos/:id", auth, productoController.obtenerProducto);
   router.put(
     "/productos/:id",
+    auth,
     productoController.subirArchivo,
     productoController.actualizarProducto
   );
-  router.delete("/productos/:id", productoController.eliminarProducto);
+  router.delete("/productos/:id", auth, productoController.eliminarProducto);
 
-  router.post("/pedidos", pedidosController.nuevoPedido);
-  router.get("/pedidos", pedidosController.mostrarPedidos);
-  router.get("/pedidos/:id", pedidosController.obtenerPedido);
-  router.put("/pedidos/:id", pedidosController.actualizarPedido);
-  router.delete("/pedidos/:id", pedidosController.eliminarPedido);
+  router.post("/pedidos", auth, pedidosController.nuevoPedido);
+  router.get("/pedidos", auth, pedidosController.mostrarPedidos);
+  router.get("/pedidos/:id", auth, pedidosController.obtenerPedido);
+  router.put("/pedidos/:id", auth, pedidosController.actualizarPedido);
+  router.delete("/pedidos/:id", auth, pedidosController.eliminarPedido);
+
+  router.post("/crear-cuenta", usuariosController.registrarUsuario);
+
+  router.post("/iniciar-sesion", usuariosController.autenticarUsuario);
 
   return router;
 };

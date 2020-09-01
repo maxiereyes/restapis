@@ -15,10 +15,23 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 const app = express();
 
-app.use(cors());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const whitelist = [process.env.DOMAIN_WHITELIST];
+const corsOptions = {
+  origin: (origin, callback) => {
+    const existe = whitelist.some((dominio) => dominio === origin);
+
+    if (existe) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS"));
+    }
+  },
+};
+
+app.use(cors());
 
 app.use("/", routes());
 
