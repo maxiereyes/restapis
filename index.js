@@ -18,6 +18,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static("uploads"));
+
 const whitelist = [process.env.DOMAIN_WHITELIST];
 const corsOptions = {
   origin: (origin, callback) => {
@@ -31,11 +33,9 @@ const corsOptions = {
   },
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use("/", routes());
-
-app.use(express.static("uploads"));
 
 const host = process.env.HOST || "0.0.0.0";
 const port = process.env.PORT || 3000;
